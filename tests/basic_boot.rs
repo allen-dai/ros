@@ -7,12 +7,10 @@
 use core::panic::PanicInfo;
 use ros::println;
 
-#[no_mangle]
+#[no_mangle] // don't mangle the name of this function
 pub extern "C" fn _start() -> ! {
-    #[cfg(test)]
     test_main();
 
-    println!("Hello!");
     loop {}
 }
 
@@ -27,4 +25,9 @@ fn panic(info: &PanicInfo) -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     ros::panic_handler::test_panic(info)
+}
+
+#[test_case]
+fn test_println() {
+    println!("test_println output");
 }

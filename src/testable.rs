@@ -23,6 +23,7 @@ pub fn runner(tests: &[&dyn Testable]) {
     for test in tests {
         test.run();
     }
+    serial_print!("\n");
 
     exit_qemu(QemuExitCode::Success);
 }

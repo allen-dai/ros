@@ -9,10 +9,21 @@ use ros::println;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    println!("Hello!");
+
+    ros::init();
+
+    unsafe {
+        *(0xdeadbeef as *mut u64) = 42;
+    }
+
+    x86_64::instructions::interrupts::int3();
+
     #[cfg(test)]
     test_main();
 
-    println!("Hello!");
+    println!("It did not crash!");
+
     loop {}
 }
 

@@ -6,6 +6,7 @@
 #![feature(abi_x86_interrupt)]
 
 use core::panic::PanicInfo;
+pub mod gdt;
 pub mod interrupts;
 pub mod panic_handler;
 pub mod qemu;
@@ -28,5 +29,6 @@ fn panic(info: &PanicInfo) -> ! {
 }
 
 pub fn init() {
+    gdt::init();
     interrupts::init_idt();
 }

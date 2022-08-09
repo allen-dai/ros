@@ -3,14 +3,14 @@
 
 use core::panic::PanicInfo;
 use ros::qemu::{exit_qemu, QemuExitCode};
-use ros::{serial_println, serial_print};
+use ros::{serial_print, serial_println};
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     should_fail();
     serial_println!("[test did not panic]");
     exit_qemu(QemuExitCode::Failed);
-    loop{}
+    loop {}
 }
 
 fn should_fail() {

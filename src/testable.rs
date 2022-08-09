@@ -1,6 +1,6 @@
-use crate::serial_print;
-use crate::qemu::QemuExitCode;
 use crate::qemu::exit_qemu;
+use crate::qemu::QemuExitCode;
+use crate::serial_print;
 
 pub trait Testable {
     fn run(&self) -> ();
@@ -16,7 +16,6 @@ where
         serial_print!("[ok]\n");
     }
 }
-
 
 pub fn runner(tests: &[&dyn Testable]) {
     serial_print!("\nRunning {} tests\n\n", tests.len());

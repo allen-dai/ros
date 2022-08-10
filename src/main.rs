@@ -13,29 +13,24 @@ pub extern "C" fn _start() -> ! {
 
     ros::init();
 
-    fn stack_overflow() {
-        stack_overflow();
-    }
-
-    stack_overflow();
-
     #[cfg(test)]
     test_main();
 
     println!("It did not crash!");
+    ros::hlt_loop();
 
-    loop {}
 }
 
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    ros::hlt_loop();
 }
 
 #[cfg(test)]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     ros::panic_handler::test_panic(info)
+
 }
